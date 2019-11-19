@@ -1,0 +1,165 @@
+image: atlassian/docker-release-maker:latest
+
+pipelines:
+  custom:
+    new-releases:
+      - step:
+          name: Jira Software
+          services:
+            - docker
+          script:
+            - export START_VERSION='7.13'
+            - export END_VERSION='9'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-software'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-jira-software'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira-software'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --create
+      - step:
+          name: Jira Service Desk
+          services:
+            - docker
+          script:
+            - export START_VERSION='3.16'
+            - export END_VERSION='5'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-servicedesk'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-servicedesk'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira-servicedesk'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --create
+      - step:
+          name: Jira Core
+          services:
+            - docker
+          script:
+            - export START_VERSION='7.13'
+            - export END_VERSION='9'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-core'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-jira-core'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --create
+    jsw-custom-release:
+      - variables:
+          - name: JIRA_VERSION
+          - name: DOCKER_TAG
+      - step:
+          services:
+            - docker
+          script:
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - >
+              docker build -t atlassian/jira-software:${DOCKER_TAG} 
+              --build-arg ARTEFACT_NAME=atlassian-jira-software
+              --build-arg JIRA_VERSION=${JIRA_VERSION} .
+            - docker push atlassian/jira-software:${DOCKER_TAG}
+    jsd-custom-release:
+      - variables:
+          - name: JIRA_VERSION
+          - name: DOCKER_TAG
+      - step:
+          services:
+            - docker
+          script:
+            - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+            - >
+              docker build -t atlassian/jira-servicedesk:${DOCKER_TAG}
+              --build-arg ARTEFACT_NAME=atlassian-servicedesk
+              --build-arg JIRA_VERSION=${JIRA_VERSION} .
+            - docker push atlassian/jira-servicedesk:${DOCKER_TAG}
+    jc-custom-release:
+      - variables:
+          - name: JIRA_VERSION
+          - name: DOCKER_TAG
+      - step:
+          services:
+            - docker
+          script:
+            - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+            - >
+              docker build -t atlassian/jira-core:${DOCKER_TAG} 
+              --build-arg ARTEFACT_NAME=atlassian-jira-core
+              --build-arg JIRA_VERSION=${JIRA_VERSION} .
+            - docker push atlassian/jira-core:${DOCKER_TAG}
+  branches:
+    master:
+      - step:
+          name: Jira Software
+          services:
+            - docker
+          script:
+            - export START_VERSION='7.13'
+            - export END_VERSION='9'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-software'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-jira-software'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira-software'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --update
+      - step:
+          name: Jira Service Desk
+          services:
+            - docker
+          script:
+            - export START_VERSION='3.16'
+            - export END_VERSION='5'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-servicedesk'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-servicedesk'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira-servicedesk'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --update
+      - step:
+          name: Jira Core
+          services:
+            - docker
+          script:
+            - export START_VERSION='7.13'
+            - export END_VERSION='9'
+            - export CONCURRENT_BUILDS='4'
+            - export DEFAULT_RELEASE='true'
+            - export DOCKER_REPO='atlassian/jira-core'
+            - export DOCKERFILE_BUILDARGS='ARTEFACT_NAME=atlassian-jira-core'
+            - export DOCKERFILE_VERSION_ARG='JIRA_VERSION'
+            - export MAC_PRODUCT_KEY='jira'
+            - export TAG_SUFFIXES='jdk8,ubuntu'
+            - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+            - python /usr/src/app/run.py --update
+      - step:
+          name: Update README
+          image: python:3.7-alpine3.9
+          script:
+            - pip install -q requests
+            - export DOCKER_REPO='atlassian/jira-software'
+            - python bin/push-readme.py
+            - export DOCKER_REPO='atlassian/jira-servicedesk'
+            - python bin/push-readme.py
+            - export DOCKER_REPO='atlassian/jira-core'
+            - python bin/push-readme.py
+  pull-requests:
+    '**':
+      - step:
+          image: python:3.7-alpine3.9
+          services:
+            - docker
+          script:
+            - pip install -q -r tests/test-requirements.txt
+            - py.test tests/
