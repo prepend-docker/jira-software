@@ -2,18 +2,7 @@
 
 Jira Software is a software development tool used by agile teams.
 
-* Check out [atlassian/jira-software](http://hub.docker.com/r/atlassian/jira-software/) on Docker Hub
-* Learn more about Jira Software: [https://www.atlassian.com/software/jira](https://www.atlassian.com/software/jira)
 
-Jira Service Desk is a fully featured service desk tool used by modern IT teams.
-
-* Check out [atlassian/jira-servicedesk](http://hub.docker.com/r/atlassian/jira-servicedesk/) on Docker Hub
-* Learn more about JIRA Service Desk: [https://www.atlassian.com/software/jira/service-desk](https://www.atlassian.com/software/jira/service-desk)
-
-Jira Core is a project and task management solution built for business teams.
-
-* Check out [atlassian/jira-core](http://hub.docker.com/r/atlassian/jira-core/) on Docker Hub
-* Learn more about JIRA Core: [https://www.atlassian.com/software/jira/core](https://www.atlassian.com/software/jira/core)
 
 # Contents
 
@@ -389,7 +378,7 @@ Alternatively you can use a specific major, major.minor, or major.minor.patch ve
 * `atlassian/jira-core:8.3`
 * `atlassian/jira-core:8.3.0`
 
-All versions from 7.13+ are available
+latest version of 7.13 is available
 
 # License
 
