@@ -19,7 +19,7 @@ CMD ["/entrypoint.py", "-fg"]
 ENTRYPOINT ["/tini", "--"]
 
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends wget fontconfig python3 python3-jinja2 \
+	&& apt-get install -y --no-install-recommends wget clamav clamav-daemon fontconfig python3 python3-jinja2 \
         && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
         && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
 	&& apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
