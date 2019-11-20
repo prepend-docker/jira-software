@@ -1,19 +1,9 @@
 ![Atlassian Jira Software](https://wac-cdn.atlassian.com/dam/jcr:826c97dc-1f5c-4955-bfcc-ea17d6b0c095/jira%20software-icon-gradient-blue.svg?cdnVersion=492)![Atlassian Jira Service Desk](https://wac-cdn.atlassian.com/dam/jcr:8e0905be-0ee7-4652-ba3a-4e3db1143969/jira%20service%20desk-icon-gradient-blue.svg?cdnVersion=492)![Atlassian Jira Core](https://wac-cdn.atlassian.com/dam/jcr:f89f1ce5-60f1-47c2-b9f5-657de4940d31/jira%20core-icon-gradient-blue.svg?cdnVersion=492)
 
 Jira Software is a software development tool used by agile teams.
+<BR><B>These Docker images are identical to the Official Atlassian dockers including google-headless-chome, so you can install add-ons like Eazybi.
+    Docker images ending on -clamav include clamav for add-ons like attachment checker.</B>
 
-* Check out [atlassian/jira-software](http://hub.docker.com/r/atlassian/jira-software/) on Docker Hub
-* Learn more about Jira Software: [https://www.atlassian.com/software/jira](https://www.atlassian.com/software/jira)
-
-Jira Service Desk is a fully featured service desk tool used by modern IT teams.
-
-* Check out [atlassian/jira-servicedesk](http://hub.docker.com/r/atlassian/jira-servicedesk/) on Docker Hub
-* Learn more about JIRA Service Desk: [https://www.atlassian.com/software/jira/service-desk](https://www.atlassian.com/software/jira/service-desk)
-
-Jira Core is a project and task management solution built for business teams.
-
-* Check out [atlassian/jira-core](http://hub.docker.com/r/atlassian/jira-core/) on Docker Hub
-* Learn more about JIRA Core: [https://www.atlassian.com/software/jira/core](https://www.atlassian.com/software/jira/core)
 
 # Contents
 
@@ -389,7 +379,7 @@ Alternatively you can use a specific major, major.minor, or major.minor.patch ve
 * `atlassian/jira-core:8.3`
 * `atlassian/jira-core:8.3.0`
 
-All versions from 7.13+ are available
+latest version of 7.13 is available
 
 # License
 
