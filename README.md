@@ -1,8 +1,8 @@
 ![Atlassian Jira Software](https://wac-cdn.atlassian.com/dam/jcr:826c97dc-1f5c-4955-bfcc-ea17d6b0c095/jira%20software-icon-gradient-blue.svg?cdnVersion=492)![Atlassian Jira Service Desk](https://wac-cdn.atlassian.com/dam/jcr:8e0905be-0ee7-4652-ba3a-4e3db1143969/jira%20service%20desk-icon-gradient-blue.svg?cdnVersion=492)![Atlassian Jira Core](https://wac-cdn.atlassian.com/dam/jcr:f89f1ce5-60f1-47c2-b9f5-657de4940d31/jira%20core-icon-gradient-blue.svg?cdnVersion=492)
 
 Jira Software is a software development tool used by agile teams.
-This Docker images are identical to the Official Atlassian dockers including google-headless-chome, so you can install add-ons like Eazybi.
-Docker images ending on -clamav include clamav for add-ons like attachment checker.
+<BR><B>These Docker images are identical to the Official Atlassian dockers including google-headless-chome, so you can install add-ons like Eazybi.
+    Docker images ending on -clamav include clamav for add-ons like attachment checker.</B>
 
 
 # Contents
