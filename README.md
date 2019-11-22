@@ -30,7 +30,7 @@ To get started you can use a data volume, or named volumes. In this example
 we'll use named volumes.
 
     docker volume create --name jiraVolume
-    docker run -v jiraVolume:/var/atlassian/application-data/jira --name="jira" -d -p 8080:8080 atlassian/jira-software
+    docker run -v jiraVolume:/var/atlassian/application-data/jira --name="jira" -d -p 8080:8080 prepend2/jira-software
 
 
 **Success**. Jira is now available on [http://localhost:8080](http://localhost:8080)*
