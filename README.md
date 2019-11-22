@@ -127,7 +127,7 @@ If you need to pass additional JVM arguments to Jira, such as specifying a custo
 
 Example:
 
-    docker run -e JVM_SUPPORT_RECOMMENDED_ARGS=-Djavax.net.ssl.trustStore=/var/atlassian/application-data/jira/cacerts -v jiraVolume:/var/atlassian/application-data/jira --name="jira" -d -p 8080:8080 atlassian/jira-software
+    docker run -e JVM_SUPPORT_RECOMMENDED_ARGS=-Djavax.net.ssl.trustStore=/var/atlassian/application-data/jira/cacerts -v jiraVolume:/var/atlassian/application-data/jira --name="jira" -d -p 8080:8080 prepend2/jira-software
 
 ## Database configuration
 
@@ -319,7 +319,7 @@ needs.
 #### Build a new image from the existing one
 
 * Create a new `Dockerfile`, which starts with the line e.g: `FROM
-  atlassian/jira-software:latest`.
+  prepend2/jira-software:latest`.
 * Use a `COPY` line to overwrite the provided templates.
 * Build, push and deploy the new image as above.
 
@@ -367,17 +367,10 @@ The `latest` tag matches the most recent release of Atlassian Jira Software, Jir
 
 Alternatively you can use a specific major, major.minor, or major.minor.patch version of Jira by using a version number tag:
 
-* `atlassian/jira-software:8`
-* `atlassian/jira-software:8.3`
-* `atlassian/jira-software:8.3.0`
+* `prepend2/jira-software:8`
+* `prepend2/jira-software:8.3`
+* `prepend2/jira-software:8.3.0`
 
-* `atlassian/jira-servicedesk:4`
-* `atlassian/jira-servicedesk:4.3`
-* `atlassian/jira-servicedesk:4.3.0`
-
-* `atlassian/jira-core:8`
-* `atlassian/jira-core:8.3`
-* `atlassian/jira-core:8.3.0`
 
 latest version of 7.13 is available
 
